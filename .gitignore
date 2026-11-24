@@ -1,0 +1,8 @@
+build/
+DerivedData/
+xcuserdata/
+*.xcuserstate
+*.xcworkspace/
+.DS_Store
+ShamCashWeb-unsigned.ipa
+Payload/
