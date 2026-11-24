@@ -52,8 +52,13 @@ if (git status --porcelain) {
     if ($LASTEXITCODE -ne 0) { throw "Git commit failed." }
 }
 
+$previousPreference = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
 $existing = gh repo view "$owner/$RepoName" 2>$null
-if ($LASTEXITCODE -eq 0) {
+$viewExitCode = $LASTEXITCODE
+$ErrorActionPreference = $previousPreference
+
+if ($viewExitCode -eq 0) {
     Write-Host "Repository already exists: https://github.com/$owner/$RepoName" -ForegroundColor Cyan
     git remote remove origin 2>$null
     git remote add origin "https://github.com/$owner/$RepoName.git"
